@@ -94,5 +94,46 @@ def fib(n)
   arr << arr[-1] + arr[-2]
 end
 
-p fib(4)
-p fib(10)
+# p fib(4)
+# p fib(10)
+def bsearch_helper(arr, target, left_right)
+end
+
+
+def bsearch(arr, target)
+  if arr.length == 1 && arr[0] != target
+    return nil
+  end
+
+  if arr.length.even?
+    mid_idx = arr.length / 2 - 1
+  else
+    mid_idx = arr.length / 2
+  end
+
+  left_side = arr[0..mid_idx]
+  right_side = arr[mid_idx..-1]
+  # new_arr = left_side + right_side
+
+  mid = arr[mid_idx]
+  result = target <=> mid
+
+  if result == 0
+    return mid_idx
+    # return arr[0..mid_idx].length + mid_idx
+  elsif result == -1
+    bsearch(left_side, target)
+  else
+    bsearch(right_side, target)
+  end
+
+end
+
+p bsearch([1, 2, 3], 1) # => 0
+p bsearch([2, 3, 4, 5], 3) # => 1
+p bsearch([1, 2, 3, 4], 3) # => 1
+p bsearch([2, 4, 6, 8, 10], 6) # => 2
+p bsearch([1, 3, 4, 5, 9], 5) # => 3
+# p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+# p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+# p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
