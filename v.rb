@@ -24,3 +24,32 @@
   # p recur_sum([])
 
 # p  range(1,5)
+
+
+first version
+def exp(b, n)
+ return 1  if n==0 
+ b * exp(b, n - 1)
+end
+# p  exp(2, 0)
+#  p  exp(2, 3)
+
+
+
+# 2nd version
+
+def exp(b, n)
+  return 1  if n==0 
+  return b if n==1
+  if n.even?
+    exp(b, n / 2) ** 2  
+  else
+    b * (exp(b, (n - 1) / 2) ** 2)
+  end
+ end
+
+ p  exp(2, 0)
+ p  exp(2, 1)
+
+ p  exp(2, 3)
+ p  exp(2, 4)
