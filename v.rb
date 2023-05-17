@@ -5,6 +5,8 @@ def range(start,end_num)
 
 end
 
+
+
 def itera_sum(arr)
   sum = 0
   arr.each do |num|
@@ -18,6 +20,8 @@ def recur_sum(arr)
   return arr[0] if arr.length == 1
   arr[0] + recur_sum(arr[1..-1])
 end
+
+
 
 # p itera_sum([1, 2, 3])
 # p recur_sum([1, 2, 3])
@@ -44,6 +48,8 @@ def exp(b, n)
   end
 end
 
+
+
 #  p  exp(2, 0)
 #  p  exp(2, 1)
 
@@ -64,6 +70,7 @@ def deep_dup(arr,new_arr=[])
 
   new_arr
 end
+
 # arr1=[1,2,3]
 # arr4=deep_dup(arr1)
 
@@ -87,6 +94,8 @@ end
 # arr3=[]
 # p deep_dup(arr3)
 
+
+
 def fib(n)
   return [0] if n == 1
   return [0, 1] if n == 2
@@ -96,6 +105,8 @@ end
 
 # p fib(4)
 # p fib(10)
+
+
 
 def bsearch(arr, target)
   if arr.length == 1 && arr[0] != target
@@ -117,15 +128,50 @@ def bsearch(arr, target)
     valid_idx = bsearch(right_side, target)
     valid_idx += left_side.length if valid_idx
   end
+  
+end
+
+# p bsearch([1, 2, 3], 1) # => 0
+# p bsearch([2, 3, 4, 5], 3) # => 1
+# p bsearch([1, 2, 3, 4], 3) # => 2
+# p bsearch([2, 4, 6, 8, 10], 6) # => 2
+# p bsearch([1, 3, 4, 5, 9], 5) # => 3
+# p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+# p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+# p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
+# p bsearch([1, 2, 3, 4, 5, 7], 7) # => 5
+
+
+
+
+def merge_sort(arr)
+  return arr if arr.empty? || arr.length == 1
+
+  mid_idx = arr.length / 2
+  left = arr[0...mid_idx]
+  right = arr[mid_idx..-1]
+
+  merge(merge_sort(left), merge_sort(right))
+end
+
+def merge(left, right)
+  arr = []
+
+  while left.length > 0 && right.length > 0
+    if left.first < right.first
+      arr << left.shift
+    else
+      arr << right.shift
+    end
+  end
+
+  arr + left + right
 
 end
 
-p bsearch([1, 2, 3], 1) # => 0
-p bsearch([2, 3, 4, 5], 3) # => 1
-p bsearch([1, 2, 3, 4], 3) # => 2
-p bsearch([2, 4, 6, 8, 10], 6) # => 2
-p bsearch([1, 3, 4, 5, 9], 5) # => 3
-p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
-p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
-p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
-p bsearch([1, 2, 3, 4, 5, 7], 7) # => 5
+# Testing merge
+# p merge([-1, 7], [0, 2])
+# p merge([-4, 3], [-5])
+
+p merge_sort([7, -1, 2, 0, -4, 3, -5, 8, 1])
+
